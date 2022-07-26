@@ -89,16 +89,18 @@ def resolve_conflict(position_listing, player_name, player_object, first_positio
     print("Stuck in the middle with you")
     print(position_listing)
     print(first_position, compare_position)
-    first_position_diff = list(position_listing[first_position][0].values())[0] - list(position_listing[first_position][1].values())[0]
-    second_position_diff = position_listing[first_position][0][player_name] - list(position_listing[compare_position][POSITION_SLOTS_OFFENSE[compare_position]].values())[0]
-    if first_position_diff >= second_position_diff:
-        # we'll keep the player at his first position, and remove him as an option from the compare position list
-        print("Struggle Bus One") 
-        position_listing[compare_position].remove(player_object)
-    else:
-        # we'll keep the player at the compare position, and remove him as an option from the first position
-        print("Struggle Bus Two") 
-        position_listing[first_position].remove(player_object)
+    if player_name in position_listing[first_position][0].keys():
+   
+        first_position_diff = list(position_listing[first_position][0].values())[0] - list(position_listing[first_position][1].values())[0]
+        second_position_diff = position_listing[first_position][0][player_name] - list(position_listing[compare_position][POSITION_SLOTS_OFFENSE[compare_position]].values())[0]
+        if first_position_diff >= second_position_diff:
+            # we'll keep the player at his first position, and remove him as an option from the compare position list
+            print("Struggle Bus One") 
+            position_listing[compare_position].remove(player_object)
+        else:
+            # we'll keep the player at the compare position, and remove him as an option from the first position
+            print("Struggle Bus Two") 
+            position_listing[first_position].remove(player_object)
 
     return detect_conflict(position_listing)
 
